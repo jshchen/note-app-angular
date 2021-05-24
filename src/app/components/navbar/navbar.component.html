@@ -1,0 +1,27 @@
+<div class="Navbar">
+
+  <button class="button" (click) ="createFunc()">
+    <fa-icon [icon]="faEdit"></fa-icon>
+  </button>
+
+  <button class="button" (click) = "deleteFunc()">
+
+    <fa-icon [icon]="faTrash"></fa-icon>
+  </button>
+
+  <button class="button" (click)="expandFunc()">
+
+    <fa-icon [icon]="faExpand"></fa-icon>
+  </button>
+
+  <div class="searchbar">
+
+    <input class="searchinput" 
+    [(ngModel)] = "search" 
+    (ngModelChange) = "searchChanged.next($event)" 
+    value = {{this.search}}
+    (keypress)="keyPress($event)"
+    />
+
+  </div>
+</div>

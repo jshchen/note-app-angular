@@ -1,0 +1,16 @@
+<div class='editor-container'>
+  <input 
+    *ngIf = "isNumber(this.selectedNote.id)"
+    class="editor-title" 
+    [(ngModel)] = "title" 
+    (ngModelChange) = "titleChanged.next($event)" 
+    value = {{this.selectedNote.title}}/>
+  <p class = "editor-time"></p>
+  <textarea 
+    *ngIf = "isNumber(this.selectedNote.id)"
+    class="editor-body" 
+    [(ngModel)] = "text" 
+    (ngModelChange) = "textChanged.next($event)" 
+    value = "{{this.selectedNote.text}}">
+  </textarea>
+</div>

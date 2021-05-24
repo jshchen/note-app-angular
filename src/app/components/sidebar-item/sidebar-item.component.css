@@ -1,0 +1,31 @@
+div {
+  display:inline-block;
+  background-color: #f8f8f8;
+  min-width: 400px;
+  max-width: 600px;
+  text-align: left;
+  line-height: 10px;
+  border-bottom: 0.5px solid rgb(194, 194, 194);
+  height: calc(80px);
+  /* height: 0px; */
+} 
+p {
+  height: 0px;
+}
+p.title {
+  font-size: 20px;
+  padding-left: 10px;
+  font-weight: 700;
+}
+p.paragraph {
+  display: inline;
+  font-size: 15px;
+  padding-left: 10px;
+  white-space: nowrap;
+}
+p.time{
+  display: inline;
+  font-size: 15px;
+  padding-left: 10px;
+  font-weight: 700;
+}

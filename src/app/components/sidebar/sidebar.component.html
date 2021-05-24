@@ -1,0 +1,14 @@
+<div class='flex-container'>
+  <div *ngIf = "this.notes.length >= 0">
+    <div *ngFor="let note of this.notes">
+      <app-sidebar-item 
+      *ngIf="search == '' || note.title.includes(this.search) || note.text.includes(this.search)"
+      [currentNote]="note" 
+      [selectedNote]="this.selectedNote" 
+      (selectNoteEvent)="selectNoteFunc($event)">
+      </app-sidebar-item>
+    </div>
+  </div>
+  
+
+</div>

@@ -1,0 +1,16 @@
+.app-container {
+  background-color: #f8f8f8;
+  height:100%;  
+}
+.two-container {
+  height: calc(100vh - 65px);
+  flex-direction: row;
+  display: flex;
+  flex-wrap: nowrap;
+
+}
+
+
+app-editor {
+  width : 100%;
+}
