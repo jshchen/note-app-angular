@@ -27,6 +27,8 @@
     <app-editor 
     *ngIf = "this.notes.length != 0" 
     [selectedNote] = "this.selectedNote"
+    [isSearching] = "this.isSearching"
+    [findResult] = "this.findResult"
     (updateEvent) = "updateFunc($event)" 
     >
     </app-editor>

@@ -1,13 +1,13 @@
 <div (click) = "selectNoteFunc()" [ngStyle] = "{backgroundColor: this.selectedNote.id == this.currentNote.id ? '#ffe680': ''}">
   <p class="title">
-    {{currentNote.title}}
+    {{currentNote.title.length > 20? currentNote.title.substring(0, 20) + '...': currentNote.title}}
   </p>
   <span>
     <p class="time">
       {{currentNote.time}}
     </p>
     <p class="paragraph">
-      {{currentNote.text}}
+      {{currentNote.text.length > 30? currentNote.text.substring(0, 30) + '...': currentNote.text}}
     </p>
   </span>
 </div>

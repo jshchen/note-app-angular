@@ -22,7 +22,8 @@ export class EditorComponent implements OnInit, OnChanges, AfterViewInit {
   @Output() updateEvent = new EventEmitter<any>()
   uploadedNote: Note = {} as Note;
   update: boolean = false;
-
+  @Input() isSearching : boolean = false;
+  @Input() findResult : boolean = false;
   titleChanged: Subject<string> = new Subject<string>();
   textChanged: Subject<string> = new Subject<string>();
 
@@ -43,13 +44,15 @@ export class EditorComponent implements OnInit, OnChanges, AfterViewInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+    // this.title = "Loading";
+    // this.text = "Loading";
     console.log(this.selectedNote)
    }
 
   ngAfterViewInit(): void {
     this.titleChanged
       .pipe(
-        debounceTime(250),
+        debounceTime(500),
         distinctUntilChanged())
       .subscribe(e => {
         this.title = e;
@@ -62,7 +65,7 @@ export class EditorComponent implements OnInit, OnChanges, AfterViewInit {
 
     this.textChanged
       .pipe(
-        debounceTime(250),
+        debounceTime(500),
         distinctUntilChanged())
       .subscribe(e => {
         this.text = e;
@@ -75,7 +78,8 @@ export class EditorComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngOnChanges(): void {
-    console.log(this.selectedNote)
+    this.text = this.selectedNote.text;
+    this.title = this.selectedNote.title;
   }
 
 

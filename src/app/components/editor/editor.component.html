@@ -1,16 +1,23 @@
 <div class='editor-container'>
   <input 
-    *ngIf = "isNumber(this.selectedNote.id)"
+    *ngIf = "isNumber(this.selectedNote.id) && this.Notes.length >=0 && (this.isSearching == false || this.findResult == true)"
+    type = text
     class="editor-title" 
     [(ngModel)] = "title" 
     (ngModelChange) = "titleChanged.next($event)" 
-    value = {{this.selectedNote.title}}/>
-  <p class = "editor-time"></p>
+    value = "{{this.selectedNote.title}}"
+    />
+  <p 
+    class = "editor-time"
+    *ngIf = "isNumber(this.selectedNote.id) && this.Notes.length >=0 && (this.isSearching == false || this.findResult == true)">
+    {{this.selectedNote.date + '  '+ this.selectedNote.time}}
+  </p>
   <textarea 
-    *ngIf = "isNumber(this.selectedNote.id)"
+    *ngIf = "isNumber(this.selectedNote.id) && this.Notes.length >=0 && (this.isSearching == false || this.findResult == true)"
     class="editor-body" 
     [(ngModel)] = "text" 
     (ngModelChange) = "textChanged.next($event)" 
     value = "{{this.selectedNote.text}}">
   </textarea>
+  
 </div>

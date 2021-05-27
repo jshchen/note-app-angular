@@ -1,8 +1,9 @@
-import { Component, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { AfterViewChecked, Component, Input, OnChanges, OnInit, Output, AfterContentInit, AfterContentChecked } from '@angular/core';
 import { Observable, throwError } from "rxjs";
 import { catchError, retry } from 'rxjs/operators';
 import { HttpClient, HttpContext } from '@angular/common/http';
 import url from "./components/helper.js";
+import { AfterViewInit } from '@angular/core';
 
 type Note = { title: string, text: string, date: string, time: string, id: number }
 
@@ -13,7 +14,8 @@ type Note = { title: string, text: string, date: string, time: string, id: numbe
 })
 
 
-export class AppComponent implements OnInit, OnChanges {
+export class AppComponent implements OnInit, OnChanges
+{
 
   expand: boolean = true;
   title = 'note-app';
@@ -21,8 +23,6 @@ export class AppComponent implements OnInit, OnChanges {
   selectedNote: Note = {} as Note;
   selectedNoteIndex = '0';
   
-
-
   search: string = '';
   findResult: boolean = true;
   isSearching: boolean = false;
@@ -33,11 +33,18 @@ export class AppComponent implements OnInit, OnChanges {
   }
   createFunc = (Notes: []) => {
     this.notes = Notes;
+    this.selectedNote = Notes[this.notes.length - 1];
     console.log("new note created" + this.notes);
   }
   deleteFunc = (Notes: []) => {
     this.notes = Notes;
-    console.log("note deleted: " + this.notes);
+    if(this.notes.length > 0) {
+      this.selectedNote = this.notes[0];
+    }
+    else{
+      this.selectedNote = {} as Note;
+    }
+    console.log("note deleted: " + this.notes + "here");
   }
 
   searchFunc = (search) => {
@@ -45,12 +52,13 @@ export class AppComponent implements OnInit, OnChanges {
     if (search != '') {
       this.search = search
       this.isSearching = true
-      console.log("search != ''")
+      this.selectedNote = {} as Note
+      console.log("searching")
     }
     else {
       this.search = search
       this.isSearching = false
-      console.log("search == ''")
+      console.log("not searching")
     }
 
     if (this.searchforresult(this.search) === false) {
@@ -60,7 +68,6 @@ export class AppComponent implements OnInit, OnChanges {
     else {
       this.findResult = true
       console.log("findResult == true")
-
     }
   }
 
@@ -82,7 +89,12 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   updateFunc = (note) => {
-    
+    let tempid = this.notes.indexOf(this.selectedNote);
+    this.http.get<any>(url).subscribe(data => {
+      this.notes = data
+      this.selectedNote = this.notes[tempid]
+      console.log(tempid);
+    })
   }
 
 
@@ -98,7 +110,6 @@ export class AppComponent implements OnInit, OnChanges {
     })
   }
 
-
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -107,5 +118,9 @@ export class AppComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     this.getNotes();
+    if(this.isSearching == true){
+      console.log("sddffgsdfgsdfg")
+    }
   }
 }
+

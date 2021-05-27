@@ -1,5 +1,4 @@
 import { Output, EventEmitter, Component, OnInit, Input } from '@angular/core';
-// import * as EventEmitter from 'events';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { faEdit } from '@fortawesome/free-regular-svg-icons'
@@ -46,7 +45,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   createFunc = () => {
     let daytime = new Date().getTime();
-    this.http.put<any>(url + 'create?daytime=' + daytime + '&title=New Note Title ' + this.Notes.length + '&text=New Note ' + this.Notes.length + 1, {}).subscribe(
+    this.http.put<any>(url + 'create?daytime=' + daytime + '&title=New Note Title ' + '&text=New Note ', {}).subscribe(
       data => {
         this.http.get<any>(url).subscribe(newdata => {
           this.Notes = newdata;
